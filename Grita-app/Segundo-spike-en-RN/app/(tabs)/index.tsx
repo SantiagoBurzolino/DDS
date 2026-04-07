@@ -1,29 +1,28 @@
-import { useState } from 'react';
-import { useCarritoDeCompras } from '../../hooks/use-Carrito-De-Compras';
-import { FilaParaItemDeCompra } from '@/components/ui/Fila-Para-Item-De-Compra';
-import { ContenedorDeListaDeCompras } from '../../components/container/contenedor-de-lista-de-compras';
-import { ContenedorDePantalla } from '../../components/container/contenedor-de-pantalla';
+import { useState } from "react";
+import { useCarritoDeCompras } from "../../hooks/use-Carrito-De-Compras";
+import { FormularioParaNuevoProducto } from "@/components/ui/FormularioParaNuevoProducto";
+import { ContenedorDeListaDeCompras } from "../../components/container/contenedor-de-lista-de-compras";
+import { ContenedorDePantalla } from "../../components/container/contenedor-de-pantalla";
 
 export default function ControladorDeListaDeCompras() {
-  const { 
-    listaDeProductos, 
-    agregarProducto, 
-    alternarEstadoDeCompra, 
-    eliminarProducto 
+  const {
+    listaDeProductos,
+    agregarProducto,
+    alternarEstadoDeCompra,
+    eliminarProducto,
   } = useCarritoDeCompras();
-  
-  const [nombreDelNuevoProducto, setNombreDelNuevoProducto] = useState('');
+
+  const [nombreDelNuevoProducto, setNombreDelNuevoProducto] = useState("");
 
   const procesarNuevoProducto = () => {
     agregarProducto(nombreDelNuevoProducto);
-    setNombreDelNuevoProducto('');
+    setNombreDelNuevoProducto("");
   };
 
   return (
-    <ContenedorDePantalla titulo=" Lista de Compras">
-      
-      <FilaParaItemDeCompra 
-        producto={nombreDelNuevoProducto}
+    <ContenedorDePantalla titulo="🛒 Lista de Compras">
+      <FormularioParaNuevoProducto
+        valor={nombreDelNuevoProducto}
         alCambiarTexto={setNombreDelNuevoProducto}
         alEnviar={procesarNuevoProducto}
       />
@@ -33,7 +32,6 @@ export default function ControladorDeListaDeCompras() {
         alAlternarEstado={alternarEstadoDeCompra}
         alEliminar={eliminarProducto}
       />
-
     </ContenedorDePantalla>
   );
 }
