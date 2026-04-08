@@ -5,7 +5,7 @@ export const COLORES = {
 };
 
 export const MEDIDAS = {
-  umbralVolumenDeteccion: -40,
+  umbralVolumenDeteccion: -45,
   intervaloActualizacionMs: 100,
   tamanoTitulo: 32,
   tamanoTextoRelato: 24,

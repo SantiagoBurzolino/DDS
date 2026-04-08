@@ -1,41 +1,24 @@
-import { useState, useEffect } from "react";
-import { Audio } from "expo-av";
+import { useAudioPlayer } from "expo-audio";
+import { useEffect, useState } from "react";
 import { RELATOS_HISTORICOS } from "../constant/relato";
 
 export function usarReproductorDeRelato(estaGritando: boolean) {
-  const [sonidoActivo, setSonidoActivo] = useState<Audio.Sound | null>(null);
   const [relatoSeleccionado, setRelatoSeleccionado] = useState(
-    RELATOS_HISTORICOS[0],
+    RELATOS_HISTORICOS[Math.floor(Math.random() * RELATOS_HISTORICOS.length)],
   );
 
-  useEffect(() => {
-    async function controlarAudio() {
-      try {
-        if (estaGritando) {
-          if (!sonidoActivo) {
-            const seleccionAleatoria =
-              RELATOS_HISTORICOS[
-                Math.floor(Math.random() * RELATOS_HISTORICOS.length)
-              ];
-            setRelatoSeleccionado(seleccionAleatoria);
+  const reproductor = useAudioPlayer(relatoSeleccionado.archivo);
 
-            const { sound } = await Audio.Sound.createAsync(
-              seleccionAleatoria.archivo,
-            );
-            setSonidoActivo(sound);
-            await sound.playAsync();
-          } else {
-            await sonidoActivo.playAsync();
-          }
-        } else {
-          await sonidoActivo?.pauseAsync();
-        }
-      } catch (error) {
-        console.error(error);
-      }
+  useEffect(() => {
+    if (estaGritando) {
+      reproductor.play();
+    } else {
+      reproductor.pause();
+
+      const nuevoIndice = Math.floor(Math.random() * RELATOS_HISTORICOS.length);
+      setRelatoSeleccionado(RELATOS_HISTORICOS[nuevoIndice]);
     }
-    controlarAudio();
-  }, [estaGritando]);
+  }, [estaGritando, reproductor]);
 
   return { relatoSeleccionado };
 }
