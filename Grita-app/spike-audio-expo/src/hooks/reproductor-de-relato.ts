@@ -1,7 +1,8 @@
 import { useAudioPlayer } from "expo-audio";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { RELATOS_HISTORICOS } from "../constant/relato";
 import { setReproductorReproduciendo } from "./estado-reproductor";
+import { MEDIDAS } from "../constant/tema";
 
 export function usarReproductorDeRelato(estaGritando: boolean, onPlaybackEnd?: () => void) {
   const [relatoSeleccionado, setRelatoSeleccionado] = useState(
