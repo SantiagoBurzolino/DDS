@@ -117,11 +117,18 @@ export function usarDetectorDeVoz() {
     }
   };
 
+  const forzarApagarGrito = () => {
+    setEstaGritando(false);
+    ultimaDeteccionTimestampRef.current = null;
+    framesArribaRef.current = 0;
+  };
+
   return {
     estaGritando,
     decibeles,
     sistemaListo,
     activarMicrofono,
     mensajeError,
+    forzarApagarGrito,
   };
 }

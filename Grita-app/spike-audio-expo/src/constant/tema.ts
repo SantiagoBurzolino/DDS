@@ -12,6 +12,7 @@ export const MEDIDAS = {
   duracionSostenimientoMs: 1200,
   intervaloActualizacionMs: 100,
   framesConsecutivosParaDisparo: 1, // probar con 1 frame para diagnóstico
+  playbackTimeoutMs: 30000,
   tamanoTitulo: 32,
   tamanoTextoRelato: 24,
   espaciadoGeneral: 30,
